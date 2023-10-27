@@ -3,7 +3,7 @@
 <template>
   <div v-if="isMounted">
     <div v-for="producto in carrito" :key="producto.id">
-      <h1>{{ producto.producto +' '+producto.precio+' '+ producto.cantidad}} <button type="button" @click="eliminarItem(producto)">X</button></h1>
+      <h1>{{ producto.producto +' '+producto.precio+' '+ producto.cantidad+' '+producto.cantidad * producto.precio}} <button type="button" @click="eliminarItem(producto)">X</button></h1>
     </div>
    
     <div v-for="producto in productos" :key="producto.id">
