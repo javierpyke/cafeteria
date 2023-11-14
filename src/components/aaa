@@ -1,0 +1,82 @@
+<script setup lang="ts">
+  import { LineChart, useLineChart } from "vue-chart-3";
+  import { Chart, registerables } from "chart.js";
+
+  Chart.register(...registerables);
+
+  const data = {
+    labels: [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ],
+    datasets: [
+      {
+        label: "Ventas (Millones de dólares)",
+        data: [12, 19, 3, 5, 2, 3, 10, 12, 19, 3, 5, 2],
+        borderColor: "black",
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Gráficas con Vue!",
+      },
+    },
+    elements: {
+      line: {
+        tension: 0.2, // Curva de la línea
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: (context: any) => {
+            if (context.tick.value === 0) {
+              return "black"; // línea en el eje Y con valor 0
+            } else {
+              return "transparent"; // las demás líneas en eje Y
+            }
+          },
+        },
+      },
+      x: {
+        grid: {
+          color: (context: any) => {
+            if (context.tick.value === 0) {
+              return "black"; // línea en el eje X con valor 0
+            } else {
+              return "transparent"; // las demás líneas en eje X
+            }
+          },
+        },
+      },
+    },
+  };
+
+  const { lineChartProps } = useLineChart({
+    chartData: data,
+    options,
+  });
+</script>
+
+<template>
+  <LineChart v-bind="lineChartProps" />
+</template>

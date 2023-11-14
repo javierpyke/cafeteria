@@ -1,56 +1,41 @@
 
 
 <template>
-  <div v-if="isMounted">
-    <div v-for="producto in carrito" :key="producto.id">
-      <h1>{{ producto.producto +' '+producto.precio+' '+ producto.cantidad+' '+producto.cantidad * producto.precio}} <button type="button" @click="eliminarItem(producto)">X</button></h1>
+
+    <div class="d-flex flex-column mb-6 bg-surface-variant">
+      <BarraNavegacion />
+      <v-sheet class="ma-2 pa-2">
+        <router-view></router-view>
+      </v-sheet>
     </div>
-   
-    <div v-for="producto in productos" :key="producto.id">
-      <h1>{{ producto.producto +' '+producto.precio }} <button type="button" @click="agregarItem(producto)">agregar item</button> </h1>
-    </div>
-  </div>
-  
-    
-    
-    
-  
+      
+
   </template>
   
   <script setup>
   import { onMounted, ref } from 'vue';
-  // import Nt2 from './components/Nt2.vue';
   import axios from 'axios'
+  import ListadoDeProductos from './components/ListadoDeProductos.vue';
+  import Resumen from './components/Resumen.vue';
+  import BarraNavegacion from './components/BarraNavegacion.vue';
+  import { useCarritoStore } from './stores/carrito';
+  import {useRouter} from 'vue-router'
+  const router = useRouter()
+  const carrito = useCarritoStore()
+  const { agregarItem, productosEnCarrito } = carrito
+
   
   const productos = ref([])
-  const carrito = ref([])
   const isMounted = ref(false)
   
   onMounted(async ()=>{
-     const resultado = await axios("https://www.mockachino.com/389d3235-ce76-44/productos")
-     console.log(resultado.data.productos)
+     const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
      productos.value = resultado.data.productos
      isMounted.value = true
   })
-  
-  
-  
-  const agregarItem = (producto)=>
-  {
-    console.log(carrito.value.indexOf(producto))
-    if(carrito.value.indexOf(producto) != -1){
-      carrito.value[carrito.value.indexOf(producto)].cantidad += 1
-    } else {
-      producto.cantidad = 1
-      console.log(producto)
-      carrito.value.push(producto)
-    }
-    
-  }
-
+   
   const eliminarItem = (producto)=>
   {
-    console.log(carrito.value.indexOf(producto))
     carrito.value.splice(carrito.value.indexOf(producto), 1)
     
   }

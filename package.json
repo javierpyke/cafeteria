@@ -9,8 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@canvasjs/vue-charts": "^1.0.1",
+    "@chakra-ui/vue": "^0.13.1",
+    "@emotion/css": "^11.11.2",
     "axios": "^1.6.0",
-    "vue": "^3.3.4"
+    "bootstrap": "^5.3.2",
+    "bootstrap-vue": "^2.23.1",
+    "chart.js": "^3.9.1",
+    "pinia": "^2.1.7",
+    "primevue": "^3.39.0",
+    "vue": "^3.3.7",
+    "vue-chart-3": "^3.1.8",
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.3.23"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
