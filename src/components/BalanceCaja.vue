@@ -16,7 +16,7 @@
             Efectivo
           </td>
           <td>
-            $ {{totalCompras((pedidos.filter((pedido) => pedido.formaDePago === "efectivo")))}}
+            $ {{dineroEnCaja[metodosDePago.indexOf('efectivo')]}}
           </td>
         </tr>
         <tr>
@@ -24,7 +24,7 @@
             Debito
           </td>
           <td>
-            $ {{totalCompras((pedidos.filter((pedido) => pedido.formaDePago === "debito")))}}
+            $ {{dineroEnCaja[metodosDePago.indexOf('debito')]}}
           </td>
         </tr>
         <tr>
@@ -32,7 +32,7 @@
             Mercado Pago
           </td>
           <td>
-            $ {{totalCompras((pedidos.filter((pedido) => pedido.formaDePago === "mp")))}}
+            $ {{dineroEnCaja[metodosDePago.indexOf('mp')]}}
           </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
             Credito
           </td>
           <td>
-            $ {{totalCompras((pedidos.filter((pedido) => pedido.formaDePago === "credito")))}}
+            $ {{dineroEnCaja[metodosDePago.indexOf("credito")]}}
           </td>
         </tr>
       </tbody>
@@ -49,6 +49,7 @@
 
 <script setup>
   import {useRouter} from 'vue-router'
+  import { onMounted, ref } from 'vue';
   const router = useRouter()
 
   function totalCompras(pedidos){
@@ -59,9 +60,49 @@
     return productos.reduce((acumulador, producto) => acumulador + (producto.precio * producto.cantidad), 0)
   }
 
-  defineProps({
+  const props = defineProps({
     pedidos: Array,
 })
+
+  const dineroEnCaja = ref([])
+  const isMounted = ref(false)
+
+  const metodosDePago = ['efectivo','debito','mp','credito']
+
+  function recorrerPedidos(pedidos){
+    var dineroEnCajaAux = [0,0,0,0]
+    pedidos.map((pedido) => {
+      if(correspondeDia(new Date(pedido.fecha))){
+        console.log(pedido.formaDePago)
+        dineroEnCajaAux[metodosDePago.indexOf(pedido.formaDePago)] += total(pedido.productos)
+      }
+    })
+    return dineroEnCajaAux
+  }
+
+  onMounted(async ()=>{
+     dineroEnCaja.value = recorrerPedidos(props.pedidos)
+     isMounted.value = true
+  })
+
+  function correspondeDia(fecha){
+    const hoy = new Date()
+    return ( mismoAnio(fecha,hoy) && mismoMes(fecha,hoy) && mismoDia(fecha,hoy))
+  }
+
+  function mismoAnio(fecha,hoy){
+    return (fecha.getFullYear() === hoy.getFullYear())
+  }
+
+  function mismoMes(fecha,hoy){
+    return (fecha.getMonth() === hoy.getMonth())
+  }
+
+  function mismoDia(fecha,hoy){
+    return (fecha.getDate() === hoy.getDate())
+  }
+
+  
   </script>
   
   <style scoped>

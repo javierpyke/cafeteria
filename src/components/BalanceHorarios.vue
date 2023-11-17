@@ -92,12 +92,25 @@
   import { Chart, registerables } from "chart.js";
   const router = useRouter()
 
-  
+  const props = defineProps({
+  pedidos: Array
+})
   const turnos = [8,9,10,11,12,13,14,15,16,17,18,19]
 
-  function sacarData(pedidos){
+  /*function sacarData(pedidos){
     const data = turnos.map((turno) => ((pedidos.filter((pedido) => rangoHorario(pedido.fecha,turno))).length))
     return data
+  }*/
+
+  function sacarData(pedidos){
+    var pedidosPorHorario = [0,0,0,0,0,0,0,0,0,0,0,0]
+    pedidos.map((pedido) => {
+      var hora = getHorario(pedido.fecha)
+      if(turnos.indexOf(hora) !==-1){
+        pedidosPorHorario[turnos.indexOf(hora)] +=1
+      }
+    })
+    return pedidosPorHorario
   }
 
   function rangoHorario(fecha, hora){
@@ -108,9 +121,7 @@
     }
   }
   
-  const props = defineProps({
-  pedidos: Array
-})
+
   const pedidosTurno = sacarData(props.pedidos)
 
 

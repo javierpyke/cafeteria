@@ -1,13 +1,13 @@
 <template>
     <div v-if="isMounted">
-      <BalanceMetodosDePago :pedidos=pedidos />     
+      <BalanceMetodosDePago :pedidos=pedidos2 />     
       <div class="d-flex flex-row mb-6">
-        <BalanceCombos :pedidos=pedidos />
+        <BalanceCombos :pedidos=pedidos2 />
                 
-        <BalanceHorarios :pedidos=pedidos />
+        <BalanceHorarios :pedidos=pedidos2 />
       </div>
-      <BalanceCaja :pedidos=pedidosDelDia(pedidos) />  
-      <BalanceFuturosCombos :pedidos=pedidos />    
+      <BalanceCaja :pedidos=pedidos2 />  
+      <BalanceFuturosCombos :pedidos=pedidos2 />    
 
     </div>
     
@@ -66,8 +66,8 @@
   }
   
   onMounted(async ()=>{
-     const resultado = await axios("http://localhost:8080/pedidos")
-     pedidos.value = resultado.data
+     //const resultado = await axios("http://localhost:8080/pedidos")
+     //pedidos.value = resultado.data
      isMounted.value = true
   })
 

@@ -6,6 +6,7 @@
   import { LineChart, useLineChart } from "vue-chart-3";
   import { DoughnutChart, useDoughnutChart } from 'vue-chart-3';
   import { Chart, registerables } from "chart.js";
+  import { onMounted, ref } from 'vue';
 
   Chart.register(...registerables);
 
@@ -13,19 +14,33 @@
     pedidos: Array
   })
 
-  const combos = ["Combo 1", "Combo 2", "Combo 3", "Combo 4"]
+  const isMounted = ref(false)
 
-  function sacarProductos(pedido,productoNombre){
-  const pro = pedido.productos.filter((producto) => producto.nombre === productoNombre)
-  return pro.length
-}
+  
 
-  function sacarData(pedidos){
-    const data = combos.map((combo) => (pedidos.map((pedido) => sacarProductos(pedido,combo))).reduce((a, b) => a + b, 0))
-    return data
+  function recorrerPedidos(pedidos){
+    var cantidadDeCombosAux = [0,0,0,0]
+    pedidos.map((pedido) => {
+      pedido.productos.map((producto) => {
+        if(combos.indexOf(producto.nombre) !== -1){
+          cantidadDeCombosAux[combos.indexOf(producto.nombre)] +=1
+        }
+      })      
+    })
+    return cantidadDeCombosAux
   }
 
-  const dataChar = sacarData(props.pedidos)
+ 
+
+
+  const combos = ["Combo 1", "Combo 2", "Combo 3", "Combo 4"]
+
+
+  onMounted(async ()=>{
+    isMounted.value = true
+  })
+
+  const dataChar = recorrerPedidos(props.pedidos)
 
   const data = {
     labels: combos,

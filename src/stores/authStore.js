@@ -6,6 +6,7 @@ import {useRouter} from 'vue-router'
 export const useAuthStore = defineStore('auth',()=>{
 const usuario = ref(null)
 const router = useRouter()
+const pathNivel1 = ['','login','tomarPedido']
 
     //es un action
     async function login(legajo,password){
@@ -46,5 +47,15 @@ const router = useRouter()
     router.push("/login")
   }
 
-    return { login, hayUsuarioAutenticado, getNombreUsuario,getNivelDeUsuario,getTipoDeUsuario,cerrarSesion }
+  function canUserAccess(to){
+    var autorizado = false
+
+    if(usuario.value.nivel===0 || pathNivel1.indexOf(to.path.slice(1))!==-1){
+      autorizado = true
+    }
+
+    return autorizado
+  }
+
+    return { login, hayUsuarioAutenticado, getNombreUsuario,getNivelDeUsuario,getTipoDeUsuario,cerrarSesion, canUserAccess}
 })
