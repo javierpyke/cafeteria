@@ -1,6 +1,8 @@
 <template>
-  <div v-for="bebida in bebidasArray" :key="bebida.id">
-    <BalanceFuturosCombosProducto :bebida=bebida />
+  <div v-if="isMounted">
+    <div v-for="bebida in bebidas" :key="bebida.id">
+      <BalanceFuturosCombosProducto :bebida=bebida />
+    </div>
   </div>
 
 </template>
@@ -36,7 +38,8 @@ import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
   onMounted(async ()=>{
     const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
-    bebidas.value = (resultado.data.productos).filter((pro) => pro.tipo === 'bebida')
+    bebidas.value = contarProductosEnPedidos(props.pedidos)
+    console.log(bebidas.value)
     isMounted.value = true
 
     /*props.pedidos.map((ped) => {
@@ -44,72 +47,82 @@ import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
     })*/
   })
-
-  var bebidasArray = []
-
-
-  function contarProductosEnPedidos(pedidos){
-    pedidos.map((ped) => contarProductos(ped.productos))
   
-  }    
+// Creo una lista vacia donde voy a guardar las bebidas con sus respectivas comidas
 
-  function contarProductos(productos){
 
-    let comidas = []
-    let bebidas = []
+function contarProductosEnPedidos(pedidos){
+  let bebidasArray = []
+  // Recorro la lista de pedidos y paso los productos de cada pedido a contarProductos
+  const red = pedidos.map((ped) => contarProductos(ped.productos))
 
-   
+  // Recorro el listado obtenido por contarProductos
+  red.map((r) => {
+      // Recorro las bebidas y las agrego a la lista bebidasArray
+      r.bebidas.map((beb) => agregarBebidaAListado(beb,r.comidas,bebidasArray))
+  }) 
+  return bebidasArray   
+}   
+
+function contarProductos(productos){
+    // Creo dos arreglos vacios
+    var bebidas = []
+    var comidas = []
+
+    // Recorro los productos del pedido
     productos.map((pro) => {
-     
-      if(pro.tipo === 'bebida'){
-       
-        let beb = {}
-        beb = {nombre: pro.nombre,cantidad:pro.cantidad}
-        bebidas.push(beb)
-      } else if(pro.tipo === 'comida'){
-
-        let com = {}
-        com = {nombre: pro.nombre,cantidad:pro.cantidad}
-
-        comidas.push(com)
-       
-
-      }
-
+        // Creo un nuevo producto solo con la información que necesito del producto original
+        var productoNuevo = {nombre:pro.nombre,cantidad:pro.cantidad}
+        // Dependiendo que tipo de producto es, se agrega al arreglo correspondiente
+        if(pro.tipo === 'bebida'){
+            bebidas.push(productoNuevo)
+        } else if (pro.tipo === 'comida'){
+            comidas.push(productoNuevo)
+        }
     })
-    
+  // Devuelvo el un objeto que tiene las listas
+  return {bebidas,comidas}
+} 
 
-    console.log(bebidas)
-    bebidas.map((beb) => {
-     
-      var bebidaEnArray = bebidasArray.filter((bebidaEnArray) => bebidaEnArray.nombre === beb.nombre)
-
-      console.log(beb)
-      if(bebidaEnArray.length === 0){
-        beb["comidas"] = [...comidas]
-        bebidasArray.push(beb)
-      } else {
-        bebidaEnArray[0].cantidad += beb.cantidad
-        comidas.map((com) => {
-          var comidaEnArray = bebidaEnArray[0].comidas.filter((comidaEnArray) => com.nombre === comidaEnArray.nombre)
-          if(comidaEnArray.length === 0){
-            
-            bebidaEnArray[0].comidas.push(com)
-          } else {
-            comidaEnArray[0].cantidad += com.cantidad
-          }
-        })
-      }
-    
-    })
-    
+function agregarBebidaAListado(beb,comidas,bebidasArray){
+  // Busco si la bebida ya se encuentra en bebidasArray
+  var bebidaBuscada = bebidasArray.find((bebA) => bebA.nombre === beb.nombre)
+  if(!bebidaBuscada){
+    // Si no esta, agrego una copia
+    bebidasArray.push(crearBebidaNueva(beb,comidas))
+  } else {
+    // Si esta, sumo la cantidad
+    bebidaBuscada.cantidad += beb.cantidad
+    // Recorro las comidas que fueron pedidas junto a la bebida para sumarlas a las ya existentes
+    comidas.map((com) => agregarComidaABebida(bebidaBuscada,com) )    
   }
+}
 
-  const pedidos2 = props.pedidos.slice(1,4)
+function crearBebidaNueva(beb,comidas){
+  return {
+    nombre:beb.nombre,
+    cantidad:beb.cantidad,
+    // Uso Object.assing para crear una copia del producto,
+    // ya que el mismo producto puede estar en varias bebidas
+    // con diferentes cantidades
+    comidas:(comidas.map((com) => Object.assign({}, com)))
+  }
+}
+
+function agregarComidaABebida(bebidaBuscada,com){
+  // Busco si la comida ya se encuentra en la bebida
+  var comidaBuscada = bebidaBuscada.comidas.find((comA) => comA.nombre === com.nombre)
+  if(!comidaBuscada){
+    // Si no esta agrego una copia del producto
+    bebidaBuscada.comidas.push(Object.assign({}, com))
+  } else {
+    // Si esta sumo las cantidades
+    comidaBuscada.cantidad += com.cantidad
+  }  
+}
 
 
-  //contarProductosEnPedidos(props.pedidos)
-  contarProductosEnPedidos(props.pedidos.slice(1,4))
+contarProductosEnPedidos(props.pedidos)
 
 
 </script>
