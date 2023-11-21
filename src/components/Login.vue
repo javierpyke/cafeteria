@@ -1,9 +1,13 @@
-<template>
+<template>   
+    <div class="login">
+        <div>
+            <img src="../images/coffeestore.png" />
+            <div class="password">Legajo: <InputText class="outer" type="text" v-model="usuario" /></div>
+            <div class="password">Password: <Password class="outer" v-model="password" toggleMask :feedback="false" /></div>
+            <v-btn variant="outlined" @click="entrar">Entrar</v-btn>
+        </div>
+    </div>
     
-
-    <div class="ancho">Legajo: <InputText class="outer" type="text" v-model="usuario" /></div>
-    <div >Password: <Password class="outer" v-model="password" toggleMask  :feedback="false" /></div>
-    <button @click="entrar">Entrar</button>
  </template>
  
  <script setup lang="ts">
@@ -25,6 +29,19 @@
  </script>
  
  <style scoped>
+.password {
+    margin: 10px;
+}
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: white;
+  color: black;
+  margin: auto;
+}
+
 .outer {
     border: solid 1px rgb(0, 0, 0);
 }

@@ -9,7 +9,6 @@ import {createRouter, createWebHashHistory } from 'vue-router'
 import TomarPedido from './components/TomarPedido.vue'
 import Balance from './components/Balance.vue'
 import Pedidos from './components/Pedidos.vue'
-import Productos from './components/Productos.vue'
 import Combos from './components/Combos.vue'
 import Login from './components/Login.vue'
 import CanvasJSChart from '@canvasjs/vue-charts';
@@ -32,10 +31,6 @@ const vuetify = createVuetify({
     {
         path:'/pedidos',
         component:Pedidos,
-    },
-    {
-        path:'/productos',
-        component: Productos
     },
     {
         path:'/balance',

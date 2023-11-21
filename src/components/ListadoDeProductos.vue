@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <v-table>
+  <v-table class="tabla">
     <thead>
       <tr>
         <th class="text-left">
@@ -36,4 +36,7 @@ defineProps({
 </template>
 
 <style scoped>
+.tabla {
+  width: 50%;
+}
 </style>
