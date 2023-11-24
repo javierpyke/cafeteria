@@ -2,7 +2,9 @@
     <div class="login">
         <div class="caja">
             <div class="imgagen">
-                <center><img src="../images/coffeestore.png" /></center>
+                <div style="text-align: center;">
+                    <img src="../images/coffeestore.png" />
+                </div>
             </div>
             <div class="labels">
                 <div style="margin-right: 10px;">
@@ -15,10 +17,12 @@
                     <Password style="margin-top:5px" class="outer" v-model="password" :feedback="false" />            
                 </div>
             </div>
-            
-            <center><v-btn style="margin-top:5px" color="success"  @click="entrar">Entrar</v-btn></center>
+            <div style="text-align: center;">
+                <v-btn style="margin-top:5px" color="success"  @click="entrar">Entrar</v-btn>
+            </div>
         </div>
     </div>
+    
     
  </template>
  
@@ -42,9 +46,6 @@
  
  <style scoped>
 
- .imagen {
-
- }
 
 .caja {
     padding: 10px;

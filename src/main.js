@@ -65,13 +65,10 @@ createApp(App)
 const store = useAuthStore()
 
 router.beforeEach(async (to, from) => {
-    console.log(to.path!=='/login')
     if(to.path!=='/login'){
-        console.log('bbbbbbbbbbbbbbbbbbbbbbbb')
         if(!store.hayUsuarioAutenticado){
             return '/login'
         } else if (!store.canUserAccess(to)){
-            console.log('aaaaaaaaaaaaaaaaaa')
             return '/tomarPedido'
         }
     }

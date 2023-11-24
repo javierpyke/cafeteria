@@ -1,8 +1,19 @@
 <template>
-  <div v-if="isMounted">
-    <div v-for="bebida in bebidas" :key="bebida.id">
-      <BalanceFuturosCombosProducto :bebida=bebida />
-    </div>
+  <div style="text-align:center;margin-top:50px;" v-if="isMounted">
+    <v-card 
+          class="mx-auto"
+          max-width="75%"
+         
+          color="#BBDEFB"
+            theme="dark"
+        >
+    <h3 style="color:black;margin-top:10px">Bebidas mas pedidas junto a la comida mas pedida</h3>
+    <v-container class="caja">
+      <div v-for="bebida in bebidas" :key="bebida.id">
+        <BalanceFuturosCombosProducto :bebida=bebida />
+      </div>
+    </v-container>
+    </v-card>
   </div>
 
 </template>
@@ -38,8 +49,7 @@ import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
   onMounted(async ()=>{
     const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
-    bebidas.value = contarProductosEnPedidos(props.pedidos)
-    console.log(bebidas.value)
+    bebidas.value = contarProductosEnPedidos(props.pedidos).sort(ordenarProductos).slice(0,3)
     isMounted.value = true
 
     /*props.pedidos.map((ped) => {
@@ -48,6 +58,19 @@ import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
     })*/
   })
   
+function ordenarProductos(producto1,producto2){
+  if (producto1.cantidad > producto2.cantidad) {
+    return -1;
+  }
+  if (producto1.cantidad < producto2.cantidad) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+
+
+
 // Creo una lista vacia donde voy a guardar las bebidas con sus respectivas comidas
 
 
@@ -128,6 +151,13 @@ contarProductosEnPedidos(props.pedidos)
 </script>
   
   <style scoped>
+    .caja {
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content: space-around;
+  }
   .logo {
     height: 6em;
     padding: 1.5em;

@@ -47,7 +47,7 @@
     datasets: [
         {
           data: dataChar,
-          backgroundColor: ['#5fc0ee', '#32c4b0', '#fe7096', '#ffd37d']
+          backgroundColor: ['#FFCCBC', '#C5E1A5', '#80DEEA', '#7986CB']
         },
     ],
   };

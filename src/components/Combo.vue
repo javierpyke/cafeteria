@@ -41,8 +41,6 @@
       "comida":commidaSelect.value,
       "bebida":bebidaSelect.value
     }
-    console.log(combo)
-    console.log(nuevoCombo)
     fetch("http://localhost:8080/combo", {
           method: 'PUT',
           body: JSON.stringify(nuevoCombo),

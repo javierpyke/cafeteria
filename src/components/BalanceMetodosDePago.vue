@@ -54,7 +54,7 @@
   const resultados = pedidosPorFormaDePago(props.pedidos)
 
 
-  const colores = ["#FFD700", "#FFA07A", "#90EE90", "#D2B48C", "#B0C4DE", "#FFB6C1"]
+  const colores = ["#EF9A9A", "#80CBC4", "#81D4FA", "#90A4AE"]
 
 
   const dataG = resultados.map((res,x) => {

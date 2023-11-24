@@ -22,6 +22,7 @@
 
 <script setup>
   import CombosListado from './CombosListado.vue'
+  import ProductoListado from './ProductoListado.vue'
   import { onMounted, ref } from 'vue';
   import axios from 'axios'
   import ListadoDeProductos from './ListadoDeProductos.vue';
@@ -62,7 +63,6 @@
 
      
      const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
-     console.log(resultado.data)
      productos.value = resultado.data.productos
      combos.value = resultado.data.combos
      isMounted.value = true

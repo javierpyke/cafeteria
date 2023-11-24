@@ -2,7 +2,7 @@
 
 <template>
 
-    <div class="d-flex flex-column mb-6 bg-surface-variant">
+    <div class="d-flex flex-column mb-6">
       <BarraNavegacion />
       <div >
         <router-view></router-view>

@@ -1,94 +1,10 @@
 <template>
-    <!--<v-table>
-      <thead>
-        <tr>
-          <th class="text-left">
-            Horario
-          </th>
-          <th class="text-left">
-            
-          </th>
-          <th class="text-left">
-            Cantidad
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,8,10))).length}}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">
-            10 a 12 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,10,12))).length}}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">
-            12 a 14 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,12,14))).length}}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">
-            14 a 16 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,14,16))).length}}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">
-            16 a 18 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,16,18))).length}}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">
-            18 a 20 hs
-          </td>
-          <td class="text-left">
-            8 a 10 hs
-          </td>
-          <td>
-            {{(pedidos.filter((pedido) => rangoHorario(pedido.fecha,18,20))).length}}
-          </td>
-        </tr>
-      </tbody>
-    </v-table>-->
-    <RadarChart v-bind="radarChartProps" />
-
+    <BarChart v-bind="barChartProps" />
 </template>
 
 <script setup>
   import {useRouter} from 'vue-router'
-  import { RadarChart, useRadarChart } from 'vue-chart-3';
+  import { BarChart, useBarChart } from 'vue-chart-3';
   import { Chart, registerables } from "chart.js";
   const router = useRouter()
 
@@ -139,23 +55,9 @@ const options = {
       legend: {
         display: true,
         position: "top",
-      },
-      title: {
-        display: true,
-        text: "Pedidos por horario",
-      },
-    },
-    scales: {
-        r: {
-            angleLines: {
-                display: false
-            },
-            suggestedMin: 50,
-            suggestedMax: 100
-        }
-    }
+      }
 }
-
+}
 
 
 const data = {
@@ -163,12 +65,15 @@ const data = {
   datasets: [
       {
         data: pedidosTurno,
-        backgroundColor: ['#5fc0ee', '#32c4b0', '#fe7096', '#ffd37d']
+        label:"Pedidos por horario",
+        backgroundColor: ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9',
+                          '#C5CAE9', '#BBDEFB', '#B2DFDB', '#FFE0B2',
+                          '#FFCCBC', '#FFECB3', '#DCEDC8', '#B3E5FC']
       },
   ],
 };
 
-const { radarChartProps } = useRadarChart({
+const { barChartProps } = useBarChart({
   chartData: data,
   options
 });

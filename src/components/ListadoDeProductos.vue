@@ -1,6 +1,7 @@
 <script setup>
   import { useCarritoStore } from '../stores/carrito';
   import Producto from './Producto.vue';
+  import ProductoListado from './ProductoListado.vue'
 
 defineProps({
     titulo: String,
@@ -8,6 +9,7 @@ defineProps({
 })
 
 </script>
+
 
 <template>
   <v-table class="tabla">

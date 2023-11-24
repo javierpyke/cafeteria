@@ -1,13 +1,14 @@
 <template>
-    <div v-if="isMounted">
-      <BalanceMetodosDePago :pedidos=pedidos2 />     
-      <div class="d-flex flex-row mb-6">
-        <BalanceCombos :pedidos=pedidos2 />
-                
-        <BalanceHorarios :pedidos=pedidos2 />
+    <div style="width:70%;margin:auto" v-if="isMounted">
+      <div style="margin-bottom:50px" class="d-flex flex-row">
+        <BalanceMetodosDePago style="width:50%;margin-right:10px" :pedidos=pedidos2 />
+        <BalanceCaja class="caja" :pedidos=pedidos2 />    
+      </div>   
+      <div class="d-flex flex-row">
+        <BalanceCombos style="width:50%;margin-right:10px" :pedidos=pedidos2 />                
+        <BalanceHorarios style="width:40%;" :pedidos=pedidos2 />
       </div>
-      <BalanceCaja :pedidos=pedidos2 />  
-      <BalanceFuturosCombos :pedidos=pedidos2 />    
+      <BalanceFuturosCombos  :pedidos=pedidos2 />    
 
     </div>
     
@@ -17,9 +18,9 @@
   import { onMounted, ref } from 'vue';
   import axios from 'axios'
   import BalanceMetodosDePago from './BalanceMetodosDePago.vue';
+  import BalanceCombos from './BalanceCombos.vue';
   import BalanceHorarios from './BalanceHorarios.vue';
   import BalanceCaja from './BalanceCaja.vue';
-  import BalanceCombos from './BalanceCombos.vue';
   import BalanceFuturosCombos from './BalanceFuturosCombos.vue';
   import {useRouter} from 'vue-router'
   const router = useRouter()
@@ -75,6 +76,15 @@
   </script>
   
   <style scoped>
+
+  .caja {
+    width:40%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    margin-top:50px;
+  }
   .logo {
     height: 6em;
     padding: 1.5em;
