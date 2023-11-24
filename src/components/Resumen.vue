@@ -58,23 +58,44 @@ const formaDePago = ref('efectivo')
 </script>
 
 <template>
-  <h5>Resumen</h5>
-    <v-table>
+  <h2>Resumen</h2>
+  <div class="resumen">
+      <h2>TOTAL: $ {{ totalEnCarrito() }}</h2>
+      <p class="resumen">Forma de pago:</p>
+      <div>
+
+      <input type="radio" id="efectivo" value="efectivo" v-model="formaDePago">
+      <label class="label" for="efectivo">Efectivo</label>
+
+      <input type="radio" id="debito" value="debito" v-model="formaDePago">
+      <label class="label" for="debito">Debito</label>
+
+      <input type="radio" id="mp" value="mp" v-model="formaDePago">
+      <label class="label" for="mp">MercadoPago</label>
+
+      <input type="radio" id="credito" value="credito" v-model="formaDePago">
+      <label class="label" for="credito">Credito</label>
+    
+    </div>
+    <v-btn  color="success" @click="confirmarPedido
+    ">CONFIRMAR</v-btn>
+  </div>  
+    <v-table class="resumen">
       <thead>
         <tr>
-          <th class="text-left">
+          <th class="col1">
             Producto
           </th>
-          <th class="text-left">
+          <th class="col2">
             Precio Un
           </th>
-          <th class="text-left">
+          <th class="col3">
             Cant
           </th>
-          <th class="text-left">
+          <th class="col4">
             Total
           </th>
-          <th class="text-left">
+          <th class="col5">
           </th>
         </tr>
       </thead>
@@ -84,33 +105,43 @@ const formaDePago = ref('efectivo')
         </tr>
       </tbody>
     </v-table>
-
-    <h3>TOTAL: $ {{ totalEnCarrito() }}</h3>
-    <p>Forma de pago: {{ formaDePago }}</p>
-    <v-radio-group v-model="formaDePago"
-      inline
-    >
-      <v-radio
-        label="Efectivo"
-        value="efectivo"
-      ></v-radio>
-      <v-radio
-        label="Debito"
-        value="debito"
-      ></v-radio>
-      <v-radio
-        label="MercadoPago"
-        value="mp"
-      ></v-radio>
-      <v-radio
-        label="Credito"
-        value="credito"
-      ></v-radio>
-    </v-radio-group>
-
-    <v-btn color="success" @click="confirmarPedido
-    ">CONFIRMAR</v-btn>
+    
 </template>
 
 <style scoped>
+.col1 {
+  width: 25%;
+}
+
+.col2 {
+  width: 20%;
+}
+
+.col3 {
+  width: 1%;
+}
+
+.col4 {
+  width: 25%;
+}
+
+.col5 {
+  width: 30%;
+}
+  .label {
+    margin: 5px;
+  }
+
+  h2, h3 {
+    color: black;
+    text-align: center;
+
+  }
+
+  .resumen {
+    color:black;
+    font-size: 11px;
+    text-align: center;
+  }
+
 </style>

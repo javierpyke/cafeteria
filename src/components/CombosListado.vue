@@ -1,11 +1,12 @@
 <template>
-    <v-card class="tarjeta" width="250">
+    <v-card class="tarjeta" width="200">
         <template v-slot:title>
         {{ combo.nombre }}
         </template>
 
         <template v-slot:subtitle>
-        {{ combo.bebida.nombre}} & {{ combo.comida.nombre}}
+        {{ combo.bebida.nombre}} & <br>
+        {{ combo.comida.nombre}}
         </template>
 
         <template v-slot:text>

@@ -1,10 +1,22 @@
 <template>   
     <div class="login">
-        <div>
-            <img src="../images/coffeestore.png" />
-            <div class="password">Legajo: <InputText class="outer" type="text" v-model="usuario" /></div>
-            <div class="password">Password: <Password class="outer" v-model="password" toggleMask :feedback="false" /></div>
-            <v-btn variant="outlined" @click="entrar">Entrar</v-btn>
+        <div class="caja">
+            <div class="imgagen">
+                <center><img src="../images/coffeestore.png" /></center>
+            </div>
+            <div class="labels">
+                <div style="margin-right: 10px;">
+                    <div>Legajo:</div>
+                    <div style="margin-top:5px">Password:</div> 
+                </div>
+
+                <div class="inputs">
+                    <InputText class="outer" type="text" v-model="usuario" />
+                    <Password style="margin-top:5px" class="outer" v-model="password" :feedback="false" />            
+                </div>
+            </div>
+            
+            <center><v-btn style="margin-top:5px" color="success"  @click="entrar">Entrar</v-btn></center>
         </div>
     </div>
     
@@ -29,6 +41,29 @@
  </script>
  
  <style scoped>
+
+ .imagen {
+
+ }
+
+.caja {
+    padding: 10px;
+    background-color: rgb(196, 196, 196);
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+ .inputs{
+    display:flex;
+    flex-direction: column;
+
+ }
+
+ .labels{
+    display:flex;
+    flex-direction: row;
+
+ }
 .password {
     margin: 10px;
 }
@@ -40,6 +75,7 @@
   background-color: white;
   color: black;
   margin: auto;
+
 }
 
 .outer {

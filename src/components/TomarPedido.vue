@@ -102,6 +102,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    background-color: white ;
   }
 
   .resumen{
