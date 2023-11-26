@@ -13,7 +13,7 @@ defineProps({
 })
 
 function diaDeHoy(){
-  const fecha = new Date(Date.UTC-3)
+  const fecha = new Date()
   const fech = fecha.toISOString()
   const dia = fech.substr(8,2)
   const mes = fech.substr(5,2)

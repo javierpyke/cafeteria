@@ -12,9 +12,9 @@ function getFormaDePago(formaDePago){
     if(formaDePago==='efectivo'){
         return Efectivo
     } else if (formaDePago==='debito'){
-        return Efectivo
+        return Debito
     } else if (formaDePago==='credito'){
-        return Efectivo
+        return Credito
     } else if (formaDePago==='mp'){
         return Mercadopago
     }
