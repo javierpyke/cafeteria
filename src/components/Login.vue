@@ -18,8 +18,10 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                <v-btn style="margin-top:5px" color="success"  @click="entrar">Entrar</v-btn>
+                <v-btn style="margin:5px" color="success"  @click="entrar">Entrar</v-btn>
+                <p style="color:rgb(212, 0, 0)" v-if="errorLogin">{{ errorMsg }}</p>
             </div>
+            
         </div>
     </div>
     
@@ -37,9 +39,19 @@
  
     const usuario = ref(null)
     const password = ref(null)
+    const errorLogin = ref(false)
+    const errorMsg = ref('')
  
     const entrar = async ()=>{
-        await store.login(usuario,password)
+        const error = await store.login(usuario,password)
+        if(error){
+            errorLogin.value = true
+            errorMsg.value = error.error
+            usuario.value = null
+            password.value = null
+        }
+
+        
     }
     
  </script>

@@ -9,20 +9,28 @@
   const props = defineProps({
   pedidos: Array
 })
+  /* Armo array con los turnos */
   const turnos = [8,9,10,11,12,13,14,15,16,17,18,19]
+
 
   function sacarData(pedidos){
     var pedidosPorHorario = [0,0,0,0,0,0,0,0,0,0,0,0]
+    /* Recorro los pedidos */
     pedidos.map((pedido) => {
+      /* Saco la hora del pedido */
       var hora = getHorario(pedido.fecha)
+      /* Saco el indice del array turnos con la hora del pedido*/
       if(turnos.indexOf(hora) !==-1){
+        /* sumo 1 en pedidosPorHorario en la posicion que le corresponde al turno */
         pedidosPorHorario[turnos.indexOf(hora)] +=1
       }
     })
+    /* Retorno el array */
     return pedidosPorHorario
   }
  
 
+    /* Extraigo la informacion */
   const pedidosTurno = sacarData(props.pedidos)
 
 

@@ -48,48 +48,62 @@
   import Debito from './Debito.vue';
   import Credito from './Credito.vue';
 
-
+  /* Funcion que devuelve el precio total de una lista de productos */
   function total(productos){
     return productos.reduce((acumulador, producto) => acumulador + (producto.precio * producto.cantidad), 0)
   }
 
+  /* Props con pedidos */
   const props = defineProps({
     pedidos: Array,
 })
 
+  /* Creo una referencia a un array vacio donde voy a guardar los diferentes totales segun el metodo de pago */
+  /* [total efectivo, total debito, total mp, total credito] */
   const dineroEnCaja = ref([])
   const isMounted = ref(false)
 
   const metodosDePago = ['efectivo','debito','mp','credito']
 
+  /* Devuelve un array con los totales por metodo de pago */
+  /*[total efectivo, total debito, total mp, total credito]*/
   function recorrerPedidos(pedidos){
     var dineroEnCajaAux = [0,0,0,0]
+    /* Recorro los pedidos */
     pedidos.map((pedido) => {
+      /* Si el pedido es del dia de hoy */
       if(correspondeDia(new Date(pedido.fecha))){
+        /* Sumo el total del pedido en la posicion segun metodo de pago*/
         dineroEnCajaAux[metodosDePago.indexOf(pedido.formaDePago)] += total(pedido.productos)
       }
     })
+    /* retorno el array */
     return dineroEnCajaAux
   }
 
   onMounted(async ()=>{
+    /* Llamo a la funcion recorrerPedidos y guardo el resultado en la referencia de dineroEnCaja */
      dineroEnCaja.value = recorrerPedidos(props.pedidos)
      isMounted.value = true
   })
 
+  /* Devuelve true o false segun si la fecha pasada por parametro es hoy */
   function correspondeDia(fecha){
     const hoy = new Date()
     return ( mismoAnio(fecha,hoy) && mismoMes(fecha,hoy) && mismoDia(fecha,hoy))
   }
 
+   /* Devuelve true o false segun si la fecha pasada por parametro es de este año */
   function mismoAnio(fecha,hoy){
     return (fecha.getFullYear() === hoy.getFullYear())
   }
 
+     /* Devuelve true o false segun si la fecha pasada por parametro es de este mes */
   function mismoMes(fecha,hoy){
     return (fecha.getMonth() === hoy.getMonth())
   }
 
+     /* Devuelve true o false segun si la fecha pasada por parametro es de este dia de la semana */
   function mismoDia(fecha,hoy){
     return (fecha.getDate() === hoy.getDate())
   }

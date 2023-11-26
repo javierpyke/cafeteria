@@ -34,6 +34,8 @@
   const bebidas = ref ([])
 
   onMounted(async ()=>{
+    /* Cuenta la cantidad de bebidas con sus respectivas comidas las ordena de mayor a menor
+    y me quedo con las 3 mas pedidas */
     bebidas.value = contarProductosEnPedidos(props.pedidos).sort(ordenarProductos).slice(0,3)
     isMounted.value = true
   })

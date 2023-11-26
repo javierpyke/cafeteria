@@ -55,10 +55,11 @@
     if(!store.hayUsuarioAutenticado){
       router.push("/login")
     }
-     const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
-     productos.value = resultado.data.productos
-     combos.value = resultado.data.combos
-     isMounted.value = true
+     const resultadoProductos = await axios("http://localhost:8080/productos")
+     const resultadoCombos = await axios("http://localhost:8080/combos")
+     productos.value = resultadoProductos.data
+     combos.value = resultadoCombos.data
+    isMounted.value = true
   }) 
   
   </script>

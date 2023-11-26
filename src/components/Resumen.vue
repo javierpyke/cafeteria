@@ -12,23 +12,10 @@ defineProps({
     producto: Object,
 })
 
-function diaDeHoy(){
-  const fecha = new Date()
-  const fech = fecha.toISOString()
-  const dia = fech.substr(8,2)
-  const mes = fech.substr(5,2)
-  const anio = fech.substr(0,4)
-  const hora = fech.substr(11,8)
-
-  return `${mes}/${dia}/${anio} ${hora}`
-}
-
 
 function confirmarPedido(){
-  const fecha = diaDeHoy()
   const pedido = {
     productos:productosEnCarrito(),
-    fecha:fecha,
     formaDePago:formaDePago.value
   }
 

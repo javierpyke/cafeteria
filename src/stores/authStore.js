@@ -11,18 +11,18 @@ const pathNivel1 = ['','login','tomarPedido']
     //es un action
     async function login(legajo,password){
 
-        const response = await axios.get("https://www.mockachino.com/36f87b30-0846-40/usuarios")
-        const usuarios = response.data.usuarios
+        const response = await axios.get("http://localhost:8080/usuarios")
+        
+        const usuarios = response.data
         const user = parseInt(legajo.value)
         const usuarioBuscado = usuarios.filter((usuario) => usuario.legajo === user)[0]
 
-
-        if(usuarioBuscado.password === password.value){
-
-          usuario.value = usuarioBuscado
+        if(!usuarioBuscado || (usuarioBuscado.password !== password.value)){
+          return {error:'Usuario o clave invalida'}
         
         }
-
+        usuario.value = usuarioBuscado
+        
         router.push("/")
         //
     }

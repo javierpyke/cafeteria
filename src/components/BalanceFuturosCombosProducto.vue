@@ -27,6 +27,7 @@
   const comida = ref({})
 
   onMounted(async ()=>{
+    /* Ordena la comidas y me quedo con la mas pedida */
      comida.value = props.bebida.comidas.sort(ordenarProductos)[0]
   })
 
