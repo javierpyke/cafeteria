@@ -3,7 +3,9 @@
   import { useCarritoStore } from '../stores/carrito';
   import ProductoEnCarrito from './ProductoEnCarrito.vue';
   const carrito = useCarritoStore()
-  const { agregarItem, eliminarItem, productosEnCarrito,totalEnCarrito,borrarTodo } = carrito
+  import {useRouter} from 'vue-router'
+  const router = useRouter()
+  const { productosEnCarrito,totalEnCarrito } = carrito
 
 
 defineProps({
@@ -11,7 +13,7 @@ defineProps({
 })
 
 function diaDeHoy(){
-  const fecha = new Date()
+  const fecha = new Date(Date.UTC-3)
   const fech = fecha.toISOString()
   const dia = fech.substr(8,2)
   const mes = fech.substr(5,2)

@@ -1,7 +1,7 @@
 <template>
     <v-card
           class="mx-auto"
-          max-width="250"
+          max-width="200"
           color="#C5CAE9"
             theme="dark"
         >
@@ -13,7 +13,8 @@
               <div class="text-h6 mb-1">
                 {{ bebida.nombre }}
               </div>
-              <div class="text-caption">Combina con: {{ comida.nombre }}</div>
+              <div class="text-caption">Combina con:</div>
+              <div class="text-caption">{{ comida.nombre }}</div>
               <div class="text-caption">Total: {{  comida.cantidad }}</div>
             </div>
           </v-card-item>
@@ -41,14 +42,8 @@ const props = defineProps({
   if (producto1.cantidad < producto2.cantidad) {
     return 1;
   }
-  // a must be equal to b
   return 0;
 }
 
-
-
-
-
-  const nombre = ref("")
 
 </script>

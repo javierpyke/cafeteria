@@ -3,20 +3,13 @@
 </template>
 
 <script setup>
-  import {useRouter} from 'vue-router'
   import { BarChart, useBarChart } from 'vue-chart-3';
   import { Chart, registerables } from "chart.js";
-  const router = useRouter()
 
   const props = defineProps({
   pedidos: Array
 })
   const turnos = [8,9,10,11,12,13,14,15,16,17,18,19]
-
-  /*function sacarData(pedidos){
-    const data = turnos.map((turno) => ((pedidos.filter((pedido) => rangoHorario(pedido.fecha,turno))).length))
-    return data
-  }*/
 
   function sacarData(pedidos){
     var pedidosPorHorario = [0,0,0,0,0,0,0,0,0,0,0,0]
@@ -28,15 +21,7 @@
     })
     return pedidosPorHorario
   }
-
-  function rangoHorario(fecha, hora){
-    if(getHorario(fecha) >= hora && getHorario(fecha) < (hora+1)){
-      return true
-    } else {
-      return false
-    }
-  }
-  
+ 
 
   const pedidosTurno = sacarData(props.pedidos)
 
@@ -81,16 +66,4 @@ const { barChartProps } = useBarChart({
 
   
   <style scoped>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
   </style>

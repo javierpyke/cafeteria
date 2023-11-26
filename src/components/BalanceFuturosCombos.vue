@@ -21,8 +21,7 @@
 <script setup>
 
   import { ref, onMounted } from 'vue'
-  import  axios  from 'axios'
-import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
+  import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
 
   const props = defineProps({
@@ -31,31 +30,12 @@ import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
   const combos = ["Combo 1", "Combo 2", "Combo 3", "Combo 4"]
 
-  function sacarProductos(pedido,productoNombre){
-  const pro = pedido.productos.filter((producto) => producto.nombre === productoNombre)
-  return pro.length
-}
-
-  function sacarData(pedidos){
-    const data = combos.map((combo) => (pedidos.map((pedido) => sacarProductos(pedido,combo))).reduce((a, b) => a + b, 0))
-    return data
-  }
-
-  const dataChar = sacarData(props.pedidos)
-
-
   const isMounted = ref(false)
   const bebidas = ref ([])
 
   onMounted(async ()=>{
-    const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
     bebidas.value = contarProductosEnPedidos(props.pedidos).sort(ordenarProductos).slice(0,3)
     isMounted.value = true
-
-    /*props.pedidos.map((ped) => {
-      contarProductos(ped.productos)     
-
-    })*/
   })
   
 function ordenarProductos(producto1,producto2){
@@ -65,16 +45,11 @@ function ordenarProductos(producto1,producto2){
   if (producto1.cantidad < producto2.cantidad) {
     return 1;
   }
-  // a must be equal to b
   return 0;
 }
 
-
-
-// Creo una lista vacia donde voy a guardar las bebidas con sus respectivas comidas
-
-
 function contarProductosEnPedidos(pedidos){
+  // Creo una lista vacia donde voy a guardar las bebidas con sus respectivas comidas
   let bebidasArray = []
   // Recorro la lista de pedidos y paso los productos de cada pedido a contarProductos
   const red = pedidos.map((ped) => contarProductos(ped.productos))
@@ -143,11 +118,6 @@ function agregarComidaABebida(bebidaBuscada,com){
     comidaBuscada.cantidad += com.cantidad
   }  
 }
-
-
-contarProductosEnPedidos(props.pedidos)
-
-
 </script>
   
   <style scoped>
@@ -155,19 +125,7 @@ contarProductosEnPedidos(props.pedidos)
     width:100%;
     display:flex;
     flex-direction:row;
-    flex-wrap:nowrap;
+
     justify-content: space-around;
-  }
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
   }
   </style>

@@ -6,11 +6,11 @@
             </div>
             <div class="navBar">
                 Usuario: <b>{{ store.getNombreUsuario() }}</b>{{ store.getTipoDeUsuario()}}
-                    <v-btn-group class="botones" v-if="store.getNivelDeUsuario()===1">
+                    <v-btn-group  v-if="store.getNivelDeUsuario()===1">
                         <v-btn variant="tonal" router-link to="/">Tomar Pedido</v-btn>
                     </v-btn-group>
                     
-                    <v-btn-group class="botones" v-if="store.getNivelDeUsuario()===0">
+                    <v-btn-group v-if="store.getNivelDeUsuario()===0">
                         <v-btn variant="tonal" router-link to="/">Tomar Pedido</v-btn>
                         <v-btn variant="tonal" router-link to="/pedidos">Pedidos</v-btn>
                         <v-btn variant="tonal" router-link to="/combos">Combos</v-btn>
@@ -30,14 +30,11 @@
 
 <style scoped>
     .navBar {
-        vertical-align:middle;
         background-color: burlywood;
         display: flex;
         flex-direction: column;
         padding: 1rem 0 0 0;
         text-align: center;  
- 
-
     }
     .navBarDatos {
         background-color: burlywood;
@@ -46,8 +43,5 @@
         justify-content: space-around;
         border-bottom: 5px solid black;
         align-items: center;
-    }
-    .botones {
-        align-content: center;
     }
 </style>

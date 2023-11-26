@@ -1,12 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import { useCarritoStore } from '../stores/carrito';
-const carrito = useCarritoStore()
-const { eliminarItem , agregarCantidad, eliminarCantidad } = carrito
-import Mercadopago from './mercadopago.vue';
-import efectivo from './efectivo.vue';
-import debito from './debito.vue';
-import credito from './credito.vue';
+  import Mercadopago from './Mercadopago.vue';
+  import Efectivo from './Efectivo.vue';
+  import Debito from './Debito.vue';
+  import Credito from './Credito.vue';
 
 defineProps({
     pedido: Object,
@@ -14,11 +10,11 @@ defineProps({
 
 function getFormaDePago(formaDePago){
     if(formaDePago==='efectivo'){
-        return efectivo
+        return Efectivo
     } else if (formaDePago==='debito'){
-        return debito
+        return Efectivo
     } else if (formaDePago==='credito'){
-        return credito
+        return Efectivo
     } else if (formaDePago==='mp'){
         return Mercadopago
     }

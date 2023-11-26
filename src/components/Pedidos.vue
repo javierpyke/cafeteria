@@ -1,5 +1,5 @@
 <template>
-  <v-table class="tabla">
+  <v-table v-if="isMounted" class="tabla">
     <thead>
       <tr>
         <th class="text-left">
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="pedido in pedidos2"
+        v-for="pedido in pedidos"
         :key="pedido.nroPedido"
       >
         <PedidoEnListado :pedido="pedido" />
@@ -28,15 +28,9 @@
 </template>
 
 <script setup>
+  import PedidoEnListado from './PedidoEnListado.vue';
   import { onMounted, ref } from 'vue';
   import axios from 'axios'
-  import Mercadopago from './mercadopago.vue';
-  import PedidoEnListado from './PedidoEnListado.vue';
-  import { useCarritoStore } from '../stores/carrito';
-  import {useRouter} from 'vue-router'
-  const router = useRouter()
-  const carrito = useCarritoStore()
-  import pedidos2 from './pedidos.js';
   
   const pedidos = ref([])
   const isMounted = ref(false)
@@ -50,26 +44,10 @@
   </script>
   
   <style scoped>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
 
   .tabla{
     width: 70%;
     margin: auto;
-  }
-
-  body{
-    background-color: white;
   }
 
   </style>

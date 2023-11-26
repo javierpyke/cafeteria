@@ -21,24 +21,23 @@
 </template>
 
 <script setup>
-  import CombosListado from './CombosListado.vue'
-  import ProductoListado from './ProductoListado.vue'
+  import { useCarritoStore } from '../stores/carrito';
+  import { useAuthStore } from '../stores/authStore';
+  import { useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
   import axios from 'axios'
+
   import ListadoDeProductos from './ListadoDeProductos.vue';
+  import CombosListado from './CombosListado.vue'
   import Resumen from './Resumen.vue';
-  import { useCarritoStore } from '../stores/carrito';
-  import {useRouter} from 'vue-router'
-  const router = useRouter()
+
   const carrito = useCarritoStore()
-  const { agregarItem, productosEnCarrito } = carrito
-  import { useAuthStore } from '../stores/authStore'
-  import Login from "./Login.vue"
   const store = useAuthStore()
+  const router = useRouter()
   
+  const isMounted = ref(false)  
   const productos = ref([])
   const combos = ref([])
-  const isMounted = ref(false)
 
   function bebidas(productos){
     return productosPorTipo(productos,"bebida")
@@ -56,23 +55,11 @@
     if(!store.hayUsuarioAutenticado){
       router.push("/login")
     }
-     /*const resultado = await axios("http://localhost:8080/productos")
-     productos.value = resultado.data
-     const resultado2 = await axios("http://localhost:8080/combos")
-     combos.value = resultado2.data*/
-
-     
      const resultado = await axios("https://www.mockachino.com/36f87b30-0846-40/productos")
      productos.value = resultado.data.productos
      combos.value = resultado.data.combos
      isMounted.value = true
-  })
-   
-  const eliminarItem = (producto)=>
-  {
-    carrito.value.splice(carrito.value.indexOf(producto), 1)
-    
-  }
+  }) 
   
   </script>
   
@@ -80,7 +67,6 @@
   .listadoProductos {
     display: flex;
     flex-direction: row;
-
   }
   .tarjeta {
     margin: 5px;
@@ -107,17 +93,5 @@
 
   .resumen{
     width: 30%;
-  }
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
   }
   </style>

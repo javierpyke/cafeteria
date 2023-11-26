@@ -27,21 +27,21 @@
  </template>
  
  <script setup lang="ts">
- import { ref } from 'vue';
- import { useAuthStore } from '../stores/authStore';
- const store = useAuthStore()
- import axios from 'axios'
- import Password from 'primevue/password';
- import InputText from 'primevue/inputtext';
-
+    import { useAuthStore } from '../stores/authStore';
+    import { ref } from 'vue';
  
-     const usuario = ref(null)
-     const password = ref(null)
+    import Password from 'primevue/password';
+    import InputText from 'primevue/inputtext';
  
-     const entrar = async ()=>{
-
-    await store.login(usuario,password)
-     }
+    const store = useAuthStore()
+ 
+    const usuario = ref(null)
+    const password = ref(null)
+ 
+    const entrar = async ()=>{
+        await store.login(usuario,password)
+    }
+    
  </script>
  
  <style scoped>
@@ -49,8 +49,7 @@
 
 .caja {
     padding: 10px;
-    background-color: rgb(196, 196, 196);
-    border: 1px solid black;
+    border: 1px solid rgb(192, 192, 192);
     border-radius: 10px;
 
 }
@@ -70,27 +69,20 @@
 }
 .login {
   display: flex;
-  align-items: center;
+
   justify-content: center;
   padding: 50px;
   background-color: white;
   color: black;
-  margin: auto;
+
 
 }
 
 .outer {
-    border: solid 1px rgb(0, 0, 0);
+    border: solid 1px rgb(163, 163, 163);
 }
 
-.ancho {
-    width: 500px;
-}
 
-.item {
-    width: 400px;
-    border: solid 1px red;
-}
 
  
  </style>

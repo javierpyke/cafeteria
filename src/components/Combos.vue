@@ -1,21 +1,21 @@
 <template>
-  <div v-if="isMounted">
+  <div style="width: 75%;margin:auto" v-if="isMounted">
     <v-table>
       <thead>
         <tr>
-          <th class="text-left">
+          <th style="width: 10%;" class="text-left">
             Combo
           </th>
-          <th class="text-left">
+          <th style="width: 30%;" class="text-left">
             Bebida
           </th>
-          <th class="text-right">
+          <th style="width: 35%;" class="text-left">
             Comida
           </th>
-          <th class="text-right">
+          <th style="width: 25%;" class="text-center">
             Precio
           </th>
-          <th class="text-right">
+          <th style="width: 10%;" class="text-right">
 
           </th>
         </tr>
@@ -34,15 +34,8 @@
 
 <script setup>
   import { onMounted, ref } from 'vue';
-  import axios from 'axios'
-  import ListadoDeProductos from './ListadoDeProductos.vue';
   import Combo from './Combo.vue';
-  import { useCarritoStore } from '../stores/carrito';
-  import {useRouter} from 'vue-router'
-  const router = useRouter()
-  const carrito = useCarritoStore()
-  const { agregarItem, productosEnCarrito } = carrito
-
+  import axios from 'axios'
   
   const combos = ref([])
   const isMounted = ref(false)
@@ -53,25 +46,8 @@
      isMounted.value = true
   })
 
-  function itemProps (item) {
-        return {
-          title: item.nombre,
-        }
-      }
-  
+ 
   </script>
   
   <style scoped>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
   </style>

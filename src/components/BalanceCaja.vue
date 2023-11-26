@@ -6,9 +6,8 @@
       <v-card-item>
         <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('efectivo')]}}</v-card-title>
       </v-card-item>
-
       <v-card-text>
-        <efectivo />
+        <Efectivo />
       </v-card-text>
     </v-card>
     <v-card color="#E0F2F1" width="150" height="100">
@@ -17,7 +16,7 @@
       </v-card-item>
 
       <v-card-text>
-        <debito />
+        <Debito />
       </v-card-text>
     </v-card>
     <v-card color="#B3E5FC" width="150" height="100">
@@ -35,7 +34,7 @@
       </v-card-item>
 
       <v-card-text>
-        <credito />
+        <Credito />
       </v-card-text>
     </v-card>
   </div>
@@ -43,17 +42,12 @@
 </template>
 
 <script setup>
-  import {useRouter} from 'vue-router'
   import { onMounted, ref } from 'vue';
-  import Mercadopago from './mercadopago.vue';
-  import efectivo from './efectivo.vue';
-  import debito from './debito.vue';
-  import credito from './credito.vue';
-  const router = useRouter()
+  import Mercadopago from './Mercadopago.vue';
+  import Efectivo from './Efectivo.vue';
+  import Debito from './Debito.vue';
+  import Credito from './Credito.vue';
 
-  function totalCompras(pedidos){
-    return pedidos.reduce((acumulador, pedido) => acumulador + total(pedido.productos), 0)
-  }
 
   function total(productos){
     return productos.reduce((acumulador, producto) => acumulador + (producto.precio * producto.cantidad), 0)
@@ -104,24 +98,5 @@
   </script>
   
   <style scoped>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
 
-  .caja2 {
-    width:40%;
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content: space-around;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
   </style>
