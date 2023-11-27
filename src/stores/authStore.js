@@ -18,7 +18,7 @@ const pathNivel1 = ['','login','tomarPedido']
         const usuarioBuscado = usuarios.filter((usuario) => usuario.legajo === user)[0]
 
         if(!usuarioBuscado || (usuarioBuscado.password !== password.value)){
-          return {error:'Usuario o clave invalida'}
+          return {error:'Usuario o clave incorrecta'}
         
         }
         usuario.value = usuarioBuscado
