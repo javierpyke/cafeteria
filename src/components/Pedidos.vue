@@ -9,8 +9,8 @@
   
   /* Obtengo los pedidos */
   onMounted(async ()=>{
-     const resultado = await axios("http://localhost:8080/ultimosPedidos")
-     /* Los ordeno del mas nuevo al mas viejo */
+    /* Obtengo los Pedidos ordenados del mas nuevo al mas viejo */
+     const resultado = await axios("http://localhost:8080/ultimosPedidos")     
      pedidos.value = resultado.data
      isMounted.value = true
   })
