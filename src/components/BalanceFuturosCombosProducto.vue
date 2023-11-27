@@ -30,7 +30,7 @@ const props = defineProps({
 <template>
   <v-card
         class="mx-auto"
-        max-width="200"
+        width="200"
         color="#C5CAE9"
           theme="dark"
       >
