@@ -1,20 +1,7 @@
-<template>
-    <div style="width:70%;margin:auto" v-if="isMounted">
-      <div style="margin-bottom:50px" class="d-flex flex-row">
-        <BalanceMetodosDePago style="width:50%;margin-right:10px" :pedidos=pedidos />
-        <BalanceCaja class="caja" :pedidos=pedidos />    
-      </div>   
-      <div class="d-flex flex-row">
-        <BalanceCombos style="width:50%;margin-right:10px" :pedidos=pedidos :combos=combos />                
-        <BalanceHorarios style="width:40%;" :pedidos=pedidos />
-      </div>
-      <BalanceFuturosCombos  :pedidos=pedidos />    
-
-    </div>
-    
-</template>
-
 <script setup>
+  /* Componente Padre de los Balances, obtiene los pedidos y combos y se los pasa a
+  los componentes hijos */
+
   import { onMounted, ref } from 'vue';
   import axios from 'axios'
   
@@ -32,12 +19,29 @@
     /* Obtengo la informacion de los pedidos*/
      const resultado = await axios("http://localhost:8080/pedidos")
      pedidos.value = resultado.data
+     /* Obtengo la informacion de los combos*/
      const resultadoCombos = await axios("http://localhost:8080/combos")
      combos.value = resultadoCombos.data
      isMounted.value = true
   })
   
   </script>
+
+<template>
+  <div style="width:70%;margin:auto" v-if="isMounted">
+    <div style="margin-bottom:50px" class="d-flex flex-row">
+      <BalanceMetodosDePago style="width:50%;margin-right:10px" :pedidos=pedidos />
+      <BalanceCaja class="caja" :pedidos=pedidos />    
+    </div>   
+    <div class="d-flex flex-row">
+      <BalanceCombos style="width:50%;margin-right:10px" :pedidos=pedidos :combos=combos />                
+      <BalanceHorarios style="width:40%;" :pedidos=pedidos />
+    </div>
+    <BalanceFuturosCombos  :pedidos=pedidos />    
+
+  </div>
+  
+</template>
   
   <style scoped>
 

@@ -1,8 +1,5 @@
-<template>
-    <BarChart v-bind="barChartProps" />
-</template>
-
 <script setup>
+  /* Componente hijo de Balance, muestra la cantidad de pedidos segun el horario */
   import { BarChart, useBarChart } from 'vue-chart-3';
   import { Chart, registerables } from "chart.js";
 
@@ -71,6 +68,10 @@ const { barChartProps } = useBarChart({
   options
 });
 </script>
+
+<template>
+  <BarChart v-bind="barChartProps" />
+</template>
 
   
   <style scoped>

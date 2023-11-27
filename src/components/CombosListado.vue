@@ -1,3 +1,15 @@
+<script setup>
+/* Componente Hijo de TomarPedido,
+Muestro los combos y permite agregarlo o elimarlo del carrito */
+    import { useCarritoStore } from '../stores/carrito'; 
+    const carrito = useCarritoStore()
+    const { agregarItem } = carrito
+
+    defineProps({
+        combo: Object,
+    })
+</script>
+
 <template>
     <v-card class="tarjeta" width="200">
         <template v-slot:title>
@@ -22,17 +34,3 @@
 </v-card>
 </template>
 
-<script setup>
-import { useCarritoStore } from '../stores/carrito'; 
-const carrito = useCarritoStore()
-const { agregarItem } = carrito
-
-defineProps({
-    combo: Object,
-})
-
-</script>
-
-<style>
-
-</style>

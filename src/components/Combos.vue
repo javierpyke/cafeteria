@@ -1,3 +1,21 @@
+<script setup>
+/* Componente Padre, obtengo los datos de los combos
+y se lo paso al componente hijo Combo */
+  import { onMounted, ref } from 'vue';
+  import Combo from './Combo.vue';
+  import axios from 'axios'
+  
+  const combos = ref([])
+  const isMounted = ref(false)
+  
+  onMounted(async ()=>{
+    /* Obtengo los combos */
+     const resultado = await axios("http://localhost:8080/combos")
+     combos.value = resultado.data
+     isMounted.value = true
+  })
+</script>
+
 <template>
   <div style="width: 75%;margin:auto" v-if="isMounted">
     <v-table>
@@ -31,23 +49,3 @@
     </v-table>
   </div>
 </template>
-
-<script setup>
-  import { onMounted, ref } from 'vue';
-  import Combo from './Combo.vue';
-  import axios from 'axios'
-  
-  const combos = ref([])
-  const isMounted = ref(false)
-  
-  onMounted(async ()=>{
-     const resultado = await axios("http://localhost:8080/combos")
-     combos.value = resultado.data
-     isMounted.value = true
-  })
-
- 
-  </script>
-  
-  <style scoped>
-  </style>

@@ -1,4 +1,5 @@
 <script setup>
+/* Componente Padre, muestra los datos del carrito */
   import {ref} from 'vue'
   import { useCarritoStore } from '../stores/carrito';
   import ProductoEnCarrito from './ProductoEnCarrito.vue';

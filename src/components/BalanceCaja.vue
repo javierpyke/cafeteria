@@ -1,47 +1,6 @@
-<template>
-  <div>
-    <h3 style="width:100%;color:black;text-align:center">Caja del dia:</h3>
-    <v-card color="#FFEBEE"
-            theme="dark" width="150" height="100">
-      <v-card-item>
-        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('efectivo')]}}</v-card-title>
-      </v-card-item>
-      <v-card-text>
-        <Efectivo />
-      </v-card-text>
-    </v-card>
-    <v-card color="#E0F2F1" width="150" height="100">
-      <v-card-item>
-        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('debito')]}}</v-card-title>
-      </v-card-item>
-
-      <v-card-text>
-        <Debito />
-      </v-card-text>
-    </v-card>
-    <v-card color="#B3E5FC" width="150" height="100">
-      <v-card-item>
-        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('mp')]}}</v-card-title>
-      </v-card-item>
-
-      <v-card-text>
-        <Mercadopago />
-      </v-card-text>
-    </v-card>
-    <v-card color="#CFD8DC" width="150" height="100">
-      <v-card-item>
-        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf("credito")]}}</v-card-title>
-      </v-card-item>
-
-      <v-card-text>
-        <Credito />
-      </v-card-text>
-    </v-card>
-  </div>
-
-</template>
-
 <script setup>
+  /* Componente hijo de Balance, muestra la cantidad de plata que hay en la caja
+  (solo los pedidos del dia) divido segun la forma de pago */
   import { onMounted, ref } from 'vue';
   import Mercadopago from './Mercadopago.vue';
   import Efectivo from './Efectivo.vue';
@@ -107,9 +66,50 @@
   function mismoDia(fecha,hoy){
     return (fecha.getDate() === hoy.getDate())
   }
-
-  
   </script>
+
+<template>
+  <div>
+    <h3 style="width:100%;color:black;text-align:center">Caja del dia:</h3>
+    <v-card color="#FFEBEE"
+            theme="dark" width="150" height="100">
+      <v-card-item>
+        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('efectivo')]}}</v-card-title>
+      </v-card-item>
+      <v-card-text>
+        <Efectivo />
+      </v-card-text>
+    </v-card>
+    <v-card color="#E0F2F1" width="150" height="100">
+      <v-card-item>
+        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('debito')]}}</v-card-title>
+      </v-card-item>
+
+      <v-card-text>
+        <Debito />
+      </v-card-text>
+    </v-card>
+    <v-card color="#B3E5FC" width="150" height="100">
+      <v-card-item>
+        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf('mp')]}}</v-card-title>
+      </v-card-item>
+
+      <v-card-text>
+        <Mercadopago />
+      </v-card-text>
+    </v-card>
+    <v-card color="#CFD8DC" width="150" height="100">
+      <v-card-item>
+        <v-card-title>$ {{dineroEnCaja[metodosDePago.indexOf("credito")]}}</v-card-title>
+      </v-card-item>
+
+      <v-card-text>
+        <Credito />
+      </v-card-text>
+    </v-card>
+  </div>
+
+</template>
   
   <style scoped>
 

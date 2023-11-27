@@ -1,4 +1,6 @@
 <script setup>
+/* Componente Hijo de TomarPedido,
+Muestro el listado de Productos */
   import Producto from './Producto.vue';
 
 defineProps({

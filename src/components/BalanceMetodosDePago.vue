@@ -1,9 +1,8 @@
-<template>
-	<CanvasJSChart :options="options"/>
-</template>
-
 <script setup lang="ts">
-
+  /* Componente hijo de Balance, muestra la cantidad de dinero
+  segun las formas de pago de los ultimos cuatro meses.
+  En caso de que sea principio de año solo muestra los primero meses
+  Ej.: mes Marzo muestra Enero, Febrero y Marzo */
   const props = defineProps({
     pedidos: Array
   })
@@ -99,7 +98,7 @@ const resultados = recorrerPedidos(props.pedidos)
       }
 
 </script>
-  
-  <style scoped>
 
-  </style>
+<template>
+	<CanvasJSChart :options="options"/>
+</template>

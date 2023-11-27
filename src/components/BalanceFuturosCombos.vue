@@ -1,25 +1,6 @@
-<template>
-  <div style="text-align:center;margin-top:50px;" v-if="isMounted">
-    <v-card 
-          class="mx-auto"
-          max-width="75%"
-         
-          color="#BBDEFB"
-            theme="dark"
-        >
-    <h3 style="color:black;margin-top:10px">Bebidas mas pedidas junto a la comida mas pedida</h3>
-    <v-container class="caja">
-      <div v-for="bebida in bebidas" :key="bebida.id">
-        <BalanceFuturosCombosProducto :bebida=bebida />
-      </div>
-    </v-container>
-    </v-card>
-  </div>
-
-</template>
-
 <script setup>
-
+  /* Componente hijo de Balance, muestra las 3 bebidas mas pedidas
+  junto a la comida mas pedida con esa bebiba */
   import { ref, onMounted } from 'vue'
   import BalanceFuturosCombosProducto from "./BalanceFuturosCombosProducto.vue"
 
@@ -121,6 +102,26 @@ function agregarComidaABebida(bebidaBuscada,com){
   }  
 }
 </script>
+
+<template>
+  <div style="text-align:center;margin-top:50px;" v-if="isMounted">
+    <v-card 
+          class="mx-auto"
+          max-width="75%"
+         
+          color="#BBDEFB"
+            theme="dark"
+        >
+    <h3 style="color:black;margin-top:10px">Bebidas mas pedidas junto a la comida mas pedida</h3>
+    <v-container class="caja">
+      <div v-for="bebida in bebidas" :key="bebida.id">
+        <BalanceFuturosCombosProducto :bebida=bebida />
+      </div>
+    </v-container>
+    </v-card>
+  </div>
+
+</template>
   
   <style scoped>
     .caja {

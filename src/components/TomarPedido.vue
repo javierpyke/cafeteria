@@ -1,26 +1,6 @@
-<template>
-  <div>
-    <div v-if="isMounted" class="principal">
-      <div class="listado">
-        <div class="combos" >
-          <div v-for="combo in combos" :key="combo.id">
-            <CombosListado :combo=combo></CombosListado>
-          </div>
-        </div>
-        <div class="listadoProductos">
-          <ListadoDeProductos titulo="Bebidas" :productos=bebidas(productos)></ListadoDeProductos>
-          <ListadoDeProductos titulo="Comidas" :productos=comidas(productos)></ListadoDeProductos>
-        </div>
-        </div>
-      <div class="resumen">
-        <Resumen></Resumen>
-      </div>
-      
-    </div>
-  </div>
-</template>
-
 <script setup>
+/* Componente Padre, obtiene los datos de los productos y se los pasa a los componentes hijo
+para ser mostrados  */
   import { useCarritoStore } from '../stores/carrito';
   import { useAuthStore } from '../stores/authStore';
   import { useRouter } from 'vue-router';
@@ -63,6 +43,28 @@
   }) 
   
   </script>
+
+<template>
+  <div>
+    <div v-if="isMounted" class="principal">
+      <div class="listado">
+        <div class="combos" >
+          <div v-for="combo in combos" :key="combo.id">
+            <CombosListado :combo=combo></CombosListado>
+          </div>
+        </div>
+        <div class="listadoProductos">
+          <ListadoDeProductos titulo="Bebidas" :productos=bebidas(productos)></ListadoDeProductos>
+          <ListadoDeProductos titulo="Comidas" :productos=comidas(productos)></ListadoDeProductos>
+        </div>
+        </div>
+      <div class="resumen">
+        <Resumen></Resumen>
+      </div>
+      
+    </div>
+  </div>
+</template>
   
   <style scoped>
   .listadoProductos {

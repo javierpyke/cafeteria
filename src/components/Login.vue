@@ -1,3 +1,33 @@
+<script setup lang="ts">
+/* Componente Padre, permite el ingreso al sistema */
+import { useAuthStore } from '../stores/authStore';
+import { ref } from 'vue';
+
+import Password from 'primevue/password';
+import InputText from 'primevue/inputtext';
+
+const store = useAuthStore()
+
+const usuario = ref(null)
+const password = ref(null)
+const errorLogin = ref(false)
+const errorMsg = ref('')
+
+const entrar = async ()=>{
+    /* Verifico que los datos sean correctos */
+    const error = await store.login(usuario,password)
+    /* Si hay algun error lo muestro debajo de los inputs */
+    if(error){
+        errorLogin.value = true
+        errorMsg.value = error.error
+        /* Limpio los datos de los inputs */
+        usuario.value = null
+        password.value = null
+    }        
+}    
+</script>
+
+
 <template>   
     <div class="login">
         <div class="caja">
@@ -27,34 +57,6 @@
     
     
  </template>
- 
- <script setup lang="ts">
-    import { useAuthStore } from '../stores/authStore';
-    import { ref } from 'vue';
- 
-    import Password from 'primevue/password';
-    import InputText from 'primevue/inputtext';
- 
-    const store = useAuthStore()
- 
-    const usuario = ref(null)
-    const password = ref(null)
-    const errorLogin = ref(false)
-    const errorMsg = ref('')
- 
-    const entrar = async ()=>{
-        const error = await store.login(usuario,password)
-        if(error){
-            errorLogin.value = true
-            errorMsg.value = error.error
-            usuario.value = null
-            password.value = null
-        }
-
-        
-    }
-    
- </script>
  
  <style scoped>
 

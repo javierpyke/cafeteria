@@ -1,4 +1,6 @@
 <script setup>
+/* Componente Hijo de ListadoDeProductos, muestra los datos del Producto,
+permite agregar o eliminar productos al carrito */
 import { ref } from 'vue'
 import { useCarritoStore } from '../stores/carrito';
 const carrito = useCarritoStore()

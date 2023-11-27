@@ -1,27 +1,6 @@
-<template>
-    <v-card
-          class="mx-auto"
-          max-width="200"
-          color="#C5CAE9"
-            theme="dark"
-        >
-          <v-card-item>
-            <div>
-              <div class="text-overline mb-1">
-                Total: {{ bebida.cantidad }}
-              </div>
-              <div class="text-h6 mb-1">
-                {{ bebida.nombre }}
-              </div>
-              <div class="text-caption">Combina con:</div>
-              <div class="text-caption">{{ comida.nombre }}</div>
-              <div class="text-caption">Total: {{  comida.cantidad }}</div>
-            </div>
-          </v-card-item>
-        </v-card>
-</template>
-
-  <script setup >
+<script setup >
+  /* Componente hijo de BalanceFuturosCombos, muestra la bebida con la cantidad de veces pedida
+  junto a la comida mas pedida y su cantidad */
   import {ref,onMounted} from 'vue'
 
   const comida = ref({})
@@ -46,5 +25,27 @@ const props = defineProps({
   return 0;
 }
 
-
 </script>
+
+<template>
+  <v-card
+        class="mx-auto"
+        max-width="200"
+        color="#C5CAE9"
+          theme="dark"
+      >
+        <v-card-item>
+          <div>
+            <div class="text-overline mb-1">
+              Total: {{ bebida.cantidad }}
+            </div>
+            <div class="text-h6 mb-1">
+              {{ bebida.nombre }}
+            </div>
+            <div class="text-caption">Combina con:</div>
+            <div class="text-caption">{{ comida.nombre }}</div>
+            <div class="text-caption">Total: {{  comida.cantidad }}</div>
+          </div>
+        </v-card-item>
+      </v-card>
+</template>

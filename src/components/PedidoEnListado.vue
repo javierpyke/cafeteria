@@ -1,4 +1,5 @@
 <script setup>
+/* Componente Hijo de Pedidos, muestro la informacion del Pedido */
   import Mercadopago from './Mercadopago.vue';
   import Efectivo from './Efectivo.vue';
   import Debito from './Debito.vue';
@@ -8,6 +9,7 @@ defineProps({
     pedido: Object,
 })
 
+/* Segun una forma de pago en String devuelve un Componente Vue */
 function getFormaDePago(formaDePago){
     if(formaDePago==='efectivo'){
         return Efectivo
@@ -19,8 +21,8 @@ function getFormaDePago(formaDePago){
         return Mercadopago
     }
 }
-
-const totalEnCarrito = (productos) =>
+/* Devuelve el total de valor de un pedido */
+const totalEnPedido = (productos) =>
     {
         const valorInicial = 0;
         const total = productos.reduce((acumulador, producto) => acumulador + (producto.precio * producto.cantidad), valorInicial);
@@ -38,7 +40,7 @@ const totalEnCarrito = (productos) =>
     </td>
     <td class="text-right">
         <v-chip variant="flat" color="green">
-            $ {{ totalEnCarrito(pedido.productos) }}
+            $ {{ totalEnPedido(pedido.productos) }}
         </v-chip>
     </td>
     <td class="text-right">

@@ -1,8 +1,6 @@
-<template>
-   <DoughnutChart v-bind="doughnutChartProps" /> 
-</template>
-
 <script setup lang="ts">
+  /* Componente hijo de Balance, muestra la cantidad de combos
+  (mismo nombre, bebida y comida) pedidos */
   import { DoughnutChart, useDoughnutChart } from 'vue-chart-3';
 
   const props = defineProps({
@@ -21,12 +19,15 @@
   Si no esta devuelve -1 */
   function indiceCombo(combo){
     let indice = -1
-    for (var i = 0; i < props.combos.length; i++) {
+    if(props.combos){
+      for (var i = 0; i < props.combos.length; i++) {
       let comboAct = props.combos[i]
       if(combo.nombre === comboAct.nombre && mismoCombo(combo,comboAct)){
         return i
-      }
+      }      
     }
+  }
+    
   return indice
 }
 
@@ -84,6 +85,10 @@
     options
   });
 </script>
+
+<template>
+  <DoughnutChart v-bind="doughnutChartProps" /> 
+</template>
   
   <style scoped>
   </style>

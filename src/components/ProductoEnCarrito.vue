@@ -1,4 +1,6 @@
 <script setup>
+/* Componente Hijo de Resumen, muestra los datos del Producto en el carrito,
+permite agregar o eliminar productos al carrito */
 import { useCarritoStore } from '../stores/carrito';
 const carrito = useCarritoStore()
 const { eliminarItem , agregarCantidad, eliminarCantidad } = carrito
