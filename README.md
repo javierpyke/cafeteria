@@ -1,7 +1,23 @@
-# Vue 3 + Vite
+# CafeApp
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Proyecto final hecho en Vue para la materia Taller de Programación 2. El cual seguramente tiene errores pero **aprendí mucho**!
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Sobre la App
+
+Aplicación para tomar pedidos en una cafetería en la cual hay productos sueltos y combos.
+
+### Características:
+
+La aplicación posee dos tipos de usuarios: Vendedor y Administrador (Login sin seguridad por tiempos de la cursada).
+
+El administrador además de vender puede:
+
+- Armar nuevos combos.
+- Ver listado de pedidos.
+- Puede ver los balances, los cuales son:
+	- Caja del día segun las formas de pago.
+	- Cantidad de ventas por horarios.
+	- Recaudacion de los últimos 4 meses según forma de pago.
+	- Cantidad de veces que cada combo fue pedido.
+	- Las 3 bebidas más pedidas junto a la comida más pedida de cada bebida para armar futuros combos.
